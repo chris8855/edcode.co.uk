@@ -43,7 +43,6 @@ const useTwilioVideo = () => {
       identity,
       room: roomName,
     })
-    console.log("result", result)
     dispatch({ type: "join", token: result.data, identity, roomName })
   }
   return { state, getRoomToken }

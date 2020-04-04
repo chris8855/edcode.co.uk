@@ -2,9 +2,9 @@ import React from "react"
 import Join from "../components/join"
 import Layout from "../components/layout"
 
-const Chat = () => (
+const Chat = ({ location }) => (
   <Layout>
-    <Join />
+    <Join location={location} />
   </Layout>
 )
 
