@@ -3,13 +3,13 @@ import useTwilioVideo from "../hooks/useTwilioVideo"
 import { navigate } from "gatsby"
 
 const VideoDisplay = ({ roomID }) => {
-  const { state, startVideo, videoRef, leaveRoom } = useTwilioVideo()
+  const { state, roomConnect, videoRef, leaveRoom } = useTwilioVideo()
   useEffect(() => {
     if (!state.token) {
       navigate("/chat", { state: { roomName: roomID } })
     }
     if (!state.room) {
-      startVideo()
+      roomConnect()
     }
 
     window.addEventListener("beforeunload", leaveRoom)
@@ -17,7 +17,7 @@ const VideoDisplay = ({ roomID }) => {
     return () => {
       window.removeEventListener("beforeunload", leaveRoom)
     }
-  }, [state, roomID, startVideo, leaveRoom])
+  }, [state, roomID, roomConnect, leaveRoom])
   return (
     <>
       <div className="chat" ref={videoRef} />

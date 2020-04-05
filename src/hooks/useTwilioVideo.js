@@ -120,10 +120,10 @@ const useTwilioVideo = () => {
     dispatch({ type: "set-active-room", room })
   }
 
-  const startVideo = () => connectToRoom()
+  const roomConnect = () => connectToRoom()
   const leaveRoom = () => dispatch({ type: "disconnect" })
 
-  return { state, getRoomToken, startVideo, videoRef, leaveRoom }
+  return { state, getRoomToken, roomConnect, videoRef, leaveRoom }
 }
 
 export default useTwilioVideo
