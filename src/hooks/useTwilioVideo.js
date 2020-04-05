@@ -2,8 +2,7 @@ import React, { createContext, useContext, useReducer, useRef } from "react"
 import axios from "axios"
 import { connect } from "twilio-video"
 
-const TWILIO_TOKEN_URL =
-  "https://salmon-porcupine-5758.twil.io/create-room-token"
+const TWILIO_TOKEN_URL = process.env.TWILIO_API_URL
 
 const DEFAULT_STATE = {
   identity: false,

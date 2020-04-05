@@ -9,3 +9,7 @@ exports.onCreatePage = ({ page, actions }) => {
     actions.createPage(page)
   }
 }
+
+require("dotenv").config({
+  path: `.env.${process.env.NODE_ENV}`,
+})
