@@ -50,6 +50,35 @@ const useTwilioVideo = () => {
     dispatch({ type: "join", token: result.data, identity, roomName })
   }
 
+  const handleRemoteParticipant = (container, participant) => {
+    const id = participant.sid
+
+    const el = document.createElement("div")
+    el.id = id
+    el.className = "remote-participant"
+
+    const name = document.createElement("h4")
+    name.innerText = participant.identity
+    el.appendChild(name)
+
+    container.appendChild(el)
+
+    const addTrack = track => {
+      const participantDiv = document.getElementById(id)
+      const media = track.attach()
+
+      participantDiv.appendChild(media)
+    }
+
+    participant.tracks.forEach(publication => {
+      if (publication.isSubscribed) {
+        addTrack(publication.track)
+      }
+    })
+
+    participant.on("trackSubscribed", addTrack)
+  }
+
   const connectToRoom = async () => {
     if (!state.token) {
       return
@@ -70,6 +99,14 @@ const useTwilioVideo = () => {
       const localEl = localTrack.attach()
       videoRef.current.appendChild(localEl)
     }
+
+    const handleParticipant = participant => {
+      handleRemoteParticipant(videoRef.current, participant)
+    }
+
+    room.participants.forEach(handleParticipant)
+    room.on("participantConnected", handleParticipant)
+
     dispatch({ type: "set-active-room", room })
   }
 
