@@ -32,14 +32,10 @@ const reducer = (state, action) => {
 
 const TwilioVideoContext = createContext()
 
-const TwilioVideoProvider = ({ children }) => (
+export const TwilioVideoProvider = ({ children }) => (
   <TwilioVideoContext.Provider value={useReducer(reducer, DEFAULT_STATE)}>
     {children}
   </TwilioVideoContext.Provider>
-)
-
-export const wrapRootElement = ({ element }) => (
-  <TwilioVideoProvider>{element}</TwilioVideoProvider>
 )
 
 const useTwilioVideo = () => {
