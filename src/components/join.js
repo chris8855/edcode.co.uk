@@ -1,8 +1,11 @@
 import React, { useState, useEffect } from "react"
 import useTwilioVideo from "../hooks/useTwilioVideo"
+import useFirebase from "../hooks/useFirebase"
+
 import { navigate } from "gatsby"
 
 const Join = ({ location }) => {
+  const { loggedIn } = useFirebase()
   const defaultRoom =
     (location && location.state && location.state.roomName) || ""
   const { state, getRoomToken } = useTwilioVideo()
@@ -14,12 +17,14 @@ const Join = ({ location }) => {
       navigate(`/room/${state.roomName}`)
     }
   }, [state])
-
   const handleSubmit = event => {
     event.preventDefault()
+    if (!loggedIn) {
+      alert("You must login to join a room")
+      navigate("/login")
+    }
     getRoomToken({ identity, roomName })
   }
-
   return (
     <>
       <h1>Start or Join a Video Chat</h1>

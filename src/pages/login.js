@@ -4,7 +4,6 @@ import useFirebase from "../hooks/useFirebase"
 const SignIn = () => {
   const { signInWithGoogle } = useFirebase()
   const [state, setState] = useState({ email: "", password: "" })
-  console.log("user", useFirebase())
   const shallowMerge = partialState =>
     setState(prevState => ({
       ...prevState,

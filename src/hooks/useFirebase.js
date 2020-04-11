@@ -7,14 +7,20 @@ export const AuthContextProvider = ({ children }) => {
   const auth = firebase.auth()
   const provider = new firebase.auth.GoogleAuthProvider()
   const signInWithGoogle = () => auth.signInWithPopup(provider)
+
   const [user, setUser] = useState({})
+  const [loggedIn, setLoggedIn] = useState(false)
   useEffect(() => {
     auth.onAuthStateChanged(user => {
       setUser(user)
     })
+    if (user && user.uid) {
+      setLoggedIn(prevState => !prevState.loggedIn)
+    }
   }, [user])
+
   return (
-    <AuthContext.Provider value={{ user, signInWithGoogle }}>
+    <AuthContext.Provider value={{ user, loggedIn, signInWithGoogle }}>
       {children}
     </AuthContext.Provider>
   )
