@@ -1,8 +1,9 @@
 import React from "react"
 import { TwilioVideoProvider } from "./useTwilioVideo"
+import { AuthContextProvider } from "./useFirebase"
 
-const wrapRootElement = ({ element }) => (
-  <TwilioVideoProvider>{element}</TwilioVideoProvider>
+export const wrapRootElement = ({ element }) => (
+  <AuthContextProvider>
+    <TwilioVideoProvider>{element}</TwilioVideoProvider>
+  </AuthContextProvider>
 )
-
-export { wrapRootElement }
