@@ -12,6 +12,13 @@ module.exports = {
     "gatsby-plugin-theme-ui",
     `gatsby-plugin-react-helmet`,
     {
+      resolve: "gatsby-plugin-mailchimp",
+      options: {
+        endpoint:
+          "https://edcode.us19.list-manage.com/subscribe/post?u=77992a82d69e6a92fbe7cc066&amp;id=fff8e4ad38",
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
