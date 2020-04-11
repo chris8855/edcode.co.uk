@@ -33,7 +33,7 @@ const Header = ({ siteTitle }) => {
               {siteTitle}
             </Link>
           </h1>
-          <Image src={user.photoURL} variant="avatar" />
+          <Image src={user && user.photoURL} variant="avatar" />
         </Flex>
       </div>
     </header>
