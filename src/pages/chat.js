@@ -1,9 +1,7 @@
-import React, { useEffect } from "react"
-import { navigate } from "gatsby"
+import React from "react"
 
 import Join from "../components/join"
 import Layout from "../components/layout"
-import useFirebase from "../hooks/useFirebase"
 
 const Chat = ({ location }) => {
   return (
