@@ -60,36 +60,13 @@ const Header = ({ siteTitle, ...props }) => {
         display={{ sm: show ? "block" : "none", md: "block" }}
         mt={{ base: 4, md: 0 }}
       >
-        <Avatar src={user && user.photoURL} size="lg" />
+        <Avatar
+          name={user && user.displayName}
+          src={user && user.photoURL}
+          size="md"
+        />
       </Box>
     </Flex>
-    // <header
-    //   style={{
-    //     background: `rebeccapurple`,
-    //     marginBottom: `1.45rem`,
-    //   }}
-    // >
-    //   <div
-    //     style={{
-    //       margin: `0 auto`,
-    //       maxWidth: 960,
-    //       padding: `1.45rem 1.0875rem`,
-    //     }}
-    //   >
-    //     <h1 style={{ margin: 0 }}>
-    //       <Link
-    //         to="/"
-    //         style={{
-    //           color: `white`,
-    //           textDecoration: `none`,
-    //         }}
-    //       >
-    //         {siteTitle}
-    //       </Link>
-    //     </h1>
-    //     {/* <Image src={user && user.photoURL} variant="avatar" /> */}
-    //   </div>
-    // </header>
   )
 }
 
