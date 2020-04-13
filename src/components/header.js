@@ -1,42 +1,95 @@
-import { Link } from "gatsby"
+import { Link as GatsbyLink } from "gatsby"
 import PropTypes from "prop-types"
-import React from "react"
-import { Image, Flex } from "rebass"
+import React, { useState } from "react"
 import useFirebase from "../hooks/useFirebase"
+import { Link, Box, Heading, Flex, Text, Avatar } from "@chakra-ui/core"
 
-const Header = ({ siteTitle }) => {
+const MenuItems = ({ children }) => (
+  <Text mt={{ base: 4, md: 0 }} mr={6} display="block">
+    {children}
+  </Text>
+)
+
+const Header = ({ siteTitle, ...props }) => {
   const { user } = useFirebase()
-  console.log("user", user)
+  const [show, setShow] = React.useState(false)
+  const handleToggle = () => setShow(!show)
   return (
-    <header
-      style={{
-        background: `rebeccapurple`,
-        marginBottom: `1.45rem`,
-      }}
+    <Flex
+      as="nav"
+      align="center"
+      justify="space-between"
+      wrap="wrap"
+      padding="1rem"
+      bg="teal.500"
+      color="white"
+      {...props}
     >
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `1.45rem 1.0875rem`,
-        }}
+      <Flex align="center" mr={5}>
+        <Heading as="h1" size="lg" letterSpacing={"-.1rem"}>
+          <Link as={GatsbyLink} color="white" to="/">
+            {siteTitle}
+          </Link>
+        </Heading>
+      </Flex>
+
+      <Box display={{ sm: "block", md: "none" }} onClick={handleToggle}>
+        <svg
+          fill="white"
+          width="12px"
+          viewBox="0 0 20 20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <title>Menu</title>
+          <path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z" />
+        </svg>
+      </Box>
+
+      <Box
+        display={{ sm: show ? "block" : "none", md: "flex" }}
+        width={{ sm: "full", md: "auto" }}
+        alignItems="center"
+        flexGrow={1}
       >
-        <Flex>
-          <h1 style={{ margin: 0 }}>
-            <Link
-              to="/"
-              style={{
-                color: `white`,
-                textDecoration: `none`,
-              }}
-            >
-              {siteTitle}
-            </Link>
-          </h1>
-          <Image src={user && user.photoURL} variant="avatar" />
-        </Flex>
-      </div>
-    </header>
+        <MenuItems>Docs</MenuItems>
+        <MenuItems>Examples</MenuItems>
+        <MenuItems>Blog</MenuItems>
+      </Box>
+
+      <Box
+        display={{ sm: show ? "block" : "none", md: "block" }}
+        mt={{ base: 4, md: 0 }}
+      >
+        <Avatar src={user && user.photoURL} size="lg" />
+      </Box>
+    </Flex>
+    // <header
+    //   style={{
+    //     background: `rebeccapurple`,
+    //     marginBottom: `1.45rem`,
+    //   }}
+    // >
+    //   <div
+    //     style={{
+    //       margin: `0 auto`,
+    //       maxWidth: 960,
+    //       padding: `1.45rem 1.0875rem`,
+    //     }}
+    //   >
+    //     <h1 style={{ margin: 0 }}>
+    //       <Link
+    //         to="/"
+    //         style={{
+    //           color: `white`,
+    //           textDecoration: `none`,
+    //         }}
+    //       >
+    //         {siteTitle}
+    //       </Link>
+    //     </h1>
+    //     {/* <Image src={user && user.photoURL} variant="avatar" /> */}
+    //   </div>
+    // </header>
   )
 }
 
